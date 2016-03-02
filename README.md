@@ -1,8 +1,17 @@
-# Simple JSON REST API using [Gorilla Web Toolkit (Mux)][1]
+# Simple JSON REST API using [Gorilla Mux][1]
+
+[![Build Status](https://travis-ci.org/hadv/morilla.svg?branch=master)](https://travis-ci.org/hadv/morilla)
 
 ## Installation
 ```
 $ go get github.com/hadv/morilla
+```
+## Dependencies Installation
+```
+$ go get github.com/gorilla/mux
+$ go get github.com/onsi/ginkgo
+$ go get github.com/onsi/ginkgo/ginkgo
+$ go get github.com/onsi/gomega
 ```
 
 ## Compile & Running the Server
@@ -34,6 +43,6 @@ coverage: 20.9% of statements
 
 Ginkgo ran 1 suite in 2.116968979s
 Test Suite Passed
-
+```
 
 [1]: http://www.gorillatoolkit.org/pkg/mux

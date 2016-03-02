@@ -3,11 +3,11 @@ package api_test
 import (
 	. "github.com/hadv/morilla/api"
 
+	"encoding/json"
+	"fmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"fmt"
 	"io/ioutil"
-	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 )
@@ -16,9 +16,9 @@ import (
 Convert JSON data into a map.
 */
 func mapFromJSON(data []byte) map[string]interface{} {
-    var result interface{}
-    json.Unmarshal(data, &result)
-    return result.(map[string]interface{})
+	var result interface{}
+	json.Unmarshal(data, &result)
+	return result.(map[string]interface{})
 }
 
 var _ = Describe("Server", func() {
@@ -28,7 +28,6 @@ var _ = Describe("Server", func() {
 
 	BeforeEach(func() {
 		server = httptest.NewServer(NewMovieServer())
-		usersUrl = fmt.Sprintf("%s/api/v1/movies", server.URL)
 	})
 
 	AfterEach(func() {
@@ -40,6 +39,7 @@ var _ = Describe("Server", func() {
 		// Set up a new GET request before every test
 		// in this describe block.
 		BeforeEach(func() {
+			usersUrl = fmt.Sprintf("%s/api/v1/movies", server.URL)
 			request, _ = http.NewRequest("GET", usersUrl, nil)
 		})
 
@@ -65,7 +65,7 @@ var _ = Describe("Server", func() {
 				Expect(movieJSON_1["year"]).To(Equal("1981"))
 				Expect(movieJSON_1["title"]).To(Equal("Indiana Jones: Raiders of the Lost Ark"))
 
-				movieJSON_2,_ := moviesJSON["tt0076759"].(map[string]interface{})
+				movieJSON_2, _ := moviesJSON["tt0076759"].(map[string]interface{})
 				Expect(movieJSON_2["rating"]).To(Equal("8.7"))
 				Expect(movieJSON_2["year"]).To(Equal("1977"))
 				Expect(movieJSON_2["title"]).To(Equal("Star Wars: A New Hope"))

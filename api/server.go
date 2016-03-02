@@ -1,11 +1,11 @@
 package api
 
 import (
-  "encoding/json"
+	"encoding/json"
 	"fmt"
+	"github.com/gorilla/mux"
 	"log"
-  "net/http"
-  "github.com/gorilla/mux"
+	"net/http"
 )
 
 // Movie Struct
@@ -21,12 +21,12 @@ var movies = map[string]*Movie{
 }
 
 func NewMovieServer() *mux.Router {
-  router := mux.NewRouter()
+	router := mux.NewRouter()
 	sub := router.PathPrefix("/api/v1/").Subrouter()
 	sub.HandleFunc("/movies", handleMovies).Methods("GET")
 	sub.HandleFunc("/movie/{imdbKey}", handleMovie).Methods("GET", "DELETE", "POST")
 
-  return router
+	return router
 }
 
 func handleMovie(res http.ResponseWriter, req *http.Request) {
