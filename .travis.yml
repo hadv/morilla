@@ -1,7 +1,6 @@
 language: go
 
 go:
-  - 1.4
   - tip
 
 install:
@@ -11,5 +10,4 @@ install:
   - go get github.com/onsi/gomega
 
 script:
-  - go test ./...
   - ginkgo -r --randomizeAllSpecs -cover
