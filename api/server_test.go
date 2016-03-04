@@ -72,4 +72,36 @@ var _ = Describe("Server", func() {
 			})
 		})
 	})
+
+	Describe("GET /api/v1/movie", func() {
+
+		// Set up a new GET request before every test
+		// in this describe block.
+		BeforeEach(func() {
+			usersUrl = fmt.Sprintf("%s/api/v1/movie/tt0076759", server.URL)
+			request, _ = http.NewRequest("GET", usersUrl, nil)
+		})
+
+		Context("when exist movie", func() {
+			It("returns a status code of 200", func() {
+				res, _ := http.DefaultClient.Do(request)
+				Expect(res.StatusCode).To(Equal(200))
+			})
+
+			It("returns a status of [200 OK]", func() {
+				res, _ := http.DefaultClient.Do(request)
+				Expect(res.Status).To(Equal("200 OK"))
+			})
+
+			It("returns a body with a movie", func() {
+				res, _ := http.DefaultClient.Do(request)
+				b, _ := ioutil.ReadAll(res.Body)
+				movieJSON := mapFromJSON(b)
+
+				Expect(movieJSON["rating"]).To(Equal("8.7"))
+				Expect(movieJSON["year"]).To(Equal("1977"))
+				Expect(movieJSON["title"]).To(Equal("Star Wars: A New Hope"))
+			})
+		})
+	})
 })
