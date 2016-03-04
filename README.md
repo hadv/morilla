@@ -1,6 +1,7 @@
 # Simple JSON REST API using [Gorilla Mux][1]
 
 [![Build Status](https://travis-ci.org/hadv/morilla.svg?branch=master)](https://travis-ci.org/hadv/morilla)
+[![Coverage](https://gocover.io/_badge/github.com/hadv/morilla/api)](https://gocover.io/github.com/hadv/morilla/api)
 
 ## Installation
 ```
