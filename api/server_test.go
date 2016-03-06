@@ -104,4 +104,21 @@ var _ = Describe("Server", func() {
 			})
 		})
 	})
+
+	Describe("GET /api/v1/movie", func() {
+
+		// Set up a new GET request before every test
+		// in this describe block.
+		BeforeEach(func() {
+			usersUrl = fmt.Sprintf("%s/api/v1/movie/aaaa1232423", server.URL)
+			request, _ = http.NewRequest("GET", usersUrl, nil)
+		})
+
+		Context("Not found", func() {
+			It("returns a status code of 404", func() {
+				res, _ := http.DefaultClient.Do(request)
+				Expect(res.StatusCode).To(Equal(404))
+			})
+		})
+	})
 })
