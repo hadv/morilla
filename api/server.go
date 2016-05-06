@@ -3,9 +3,10 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 // Movie Struct
@@ -56,14 +57,12 @@ func handleMovie(res http.ResponseWriter, req *http.Request) {
 		decoder := json.NewDecoder(req.Body)
 		error := decoder.Decode(&movie)
 		if error != nil {
-			log.Println(error.Error())
 			http.Error(res, error.Error(), http.StatusInternalServerError)
 			return
 		}
 		movies[imdbKey] = movie
 		outgoingJSON, err := json.Marshal(movie)
 		if err != nil {
-			log.Println(error.Error())
 			http.Error(res, err.Error(), http.StatusInternalServerError)
 			return
 		}
